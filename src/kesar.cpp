@@ -1,6 +1,7 @@
 // Copyright (c) 2026 Talin Sharma
 // SPDX-License-Identifier: MIT
 
-#include "kesar.h"
+#include "kesar.hpp"
+#include <string>
 
-float kesar::version() { return 0.1; }
+std::string kesar::version() { return std::string{"0.1.0"}; }
