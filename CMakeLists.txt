@@ -5,7 +5,7 @@ include(FetchContent)
 project(Kesar LANGUAGES C CXX)
 
 add_library(${PROJECT_NAME} STATIC
-    src/kesar.c
+    src/kesar.cpp
 )
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_23)
