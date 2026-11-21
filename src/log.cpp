@@ -6,8 +6,7 @@
 #include <iostream>
 #include <string>
 
-using namespace Kesar::log;
-
+namespace Kesar::log {
 void info(std::string msg) { std::cout << "[INFO] " << msg << std::endl; }
 void warn(std::string msg) {
   std::cout << YELLOW_F << "[WARN] " << RESET << msg << std::endl;
@@ -18,3 +17,4 @@ void error(std::string msg) {
 void debug(std::string msg) {
   std::cout << GREEN_F << "[DEBUG] " << RESET << msg << std::endl;
 }
+} // namespace Kesar::log
