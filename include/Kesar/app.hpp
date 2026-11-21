@@ -12,7 +12,7 @@ namespace Kesar {
 class App {
 public:
   App();
-  ~App() = default;
+  ~App();
 
   // Disable copying to prevent double deletes of a window owned by two Apps
   App(App &) = delete;

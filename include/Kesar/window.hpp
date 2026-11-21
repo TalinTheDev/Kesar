@@ -5,12 +5,17 @@
 
 #include <string>
 
+struct GLFWwindow;
+
 namespace Kesar {
 class Window {
 public:
   Window(int width, int height, std::string title);
-  ~Window() = default;
+  ~Window();
 
   void run(void (*run)());
+
+private:
+  GLFWwindow *window;
 };
 } // namespace Kesar

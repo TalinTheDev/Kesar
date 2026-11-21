@@ -6,10 +6,23 @@
 #include <Kesar/window.hpp>
 #include <memory>
 #include <string>
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
 
 using namespace Kesar;
+using namespace Kesar::log;
 
-App::App() {}
+App::App() {
+  if (!glfwInit()) {
+    error("GLFW Initialization failed");
+  }
+}
+
+App::~App() {
+  // Clear windows list first to ensure they all get deleted before closing GLFW
+  windows.clear();
+  glfwTerminate();
+}
 
 Window *App::createWindow(int width, int height, std::string title) {
   std::unique_ptr<Window> window =
