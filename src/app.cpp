@@ -13,6 +13,7 @@ using namespace Kesar;
 using namespace Kesar::log;
 
 App::App() {
+  glfwSetErrorCallback(errCallback);
   if (!glfwInit()) {
     error("GLFW Initialization failed");
   }
@@ -25,6 +26,8 @@ App::~App() {
   info("App destroyed");
 }
 
+void App::onError(void (*errCallback)(std::string)) { eCallback = errCallback; }
+
 Window *App::createWindow(int width, int height, std::string title) {
   std::unique_ptr<Window> window =
       std::make_unique<Window>(width, height, std::move(title));
@@ -32,4 +35,4 @@ Window *App::createWindow(int width, int height, std::string title) {
   windows.push_back(std::move(window));
 
   return ptr;
-}
+};

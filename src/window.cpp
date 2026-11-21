@@ -26,12 +26,11 @@ Window::Window(int width, int height, std::string title) {
   glfwMakeContextCurrent(window);
   glfwSwapInterval(1);
   auto version = gladLoadGL(glfwGetProcAddress);
-  if (!version) {
+  if (!version)
     error("OpenGL Initialization failed");
-  }
-
-  info(std::format("Loaded OpenGL v{}.{}", GLAD_VERSION_MAJOR(version),
-                   GLAD_VERSION_MINOR(version)));
+  else
+    info(std::format("Loaded OpenGL v{}.{}", GLAD_VERSION_MAJOR(version),
+                     GLAD_VERSION_MINOR(version)));
 }
 
 Window::~Window() {

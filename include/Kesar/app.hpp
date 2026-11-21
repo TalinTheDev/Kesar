@@ -18,9 +18,15 @@ public:
   App(App &) = delete;
   App &operator=(const App &) = delete;
 
+  void onError(void (*errCallback)(std::string description));
   Window *createWindow(int width, int height, std::string title);
 
 private:
   std::vector<std::unique_ptr<Window>> windows;
+  inline static void (*eCallback)(std::string description) = nullptr;
+
+  static void errCallback(int error, const char *description) {
+    eCallback("[GLFW] " + std::string(description));
+  }
 };
 } // namespace Kesar
