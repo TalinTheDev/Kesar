@@ -24,6 +24,7 @@ Window::Window(int width, int height, std::string title) {
   this->window = window;
 
   glfwMakeContextCurrent(window);
+  glfwSwapInterval(1);
   auto version = gladLoadGL(glfwGetProcAddress);
   if (!version) {
     error("OpenGL Initialization failed");
@@ -33,6 +34,22 @@ Window::Window(int width, int height, std::string title) {
                    GLAD_VERSION_MINOR(version)));
 }
 
-Window::~Window() { glfwDestroyWindow(window); }
+Window::~Window() {
+  glfwDestroyWindow(window);
+  info("Window destroyed");
+}
 
-void Window::run(void (*run)()) {}
+void Window::run(void (*draw)(), void (*update)()) {
+  this->draw = draw;
+  this->update = update;
+
+  while (!glfwWindowShouldClose(window)) {
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    update();
+    draw();
+
+    glfwSwapBuffers(window);
+    glfwPollEvents();
+  }
+}

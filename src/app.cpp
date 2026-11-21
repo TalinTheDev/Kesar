@@ -22,6 +22,7 @@ App::~App() {
   // Clear windows list first to ensure they all get deleted before closing GLFW
   windows.clear();
   glfwTerminate();
+  info("App destroyed");
 }
 
 Window *App::createWindow(int width, int height, std::string title) {
