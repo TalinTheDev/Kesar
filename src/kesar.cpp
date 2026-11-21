@@ -4,4 +4,4 @@
 #include "Kesar/kesar.hpp"
 #include <string>
 
-std::string kesar::version() { return std::string{"0.1.0"}; }
+std::string Kesar::version() { return std::string{"0.1.0"}; }

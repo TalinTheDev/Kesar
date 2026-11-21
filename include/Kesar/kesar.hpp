@@ -5,6 +5,6 @@
 
 #include <string>
 
-namespace kesar {
+namespace Kesar {
 std::string version();
 }
