@@ -1,9 +1,11 @@
 // Copyright (c) 2026 Talin Sharma
 // SPDX-License-Identifier: MIT
 
+#include "Kesar/renderer.hpp"
 #include <Kesar/log.hpp>
 #include <Kesar/window.hpp>
 #include <format>
+#include <memory>
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 #include <glad/gl.h>
@@ -75,3 +77,15 @@ void Window::keyCallback(GLFWwindow *window, int key, int scancode, int action,
 }
 
 void Window::close() { glfwSetWindowShouldClose(window, GLFW_TRUE); }
+
+Renderer *Window::getRenderer() {
+  renderer = std::make_unique<Renderer>();
+
+  return renderer.get();
+}
+
+Renderer *Window::getRenderer(Color c) {
+  renderer = std::make_unique<Renderer>(c);
+
+  return renderer.get();
+}

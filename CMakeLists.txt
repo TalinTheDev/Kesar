@@ -10,6 +10,7 @@ add_library(${PROJECT_NAME} STATIC
     src/app.cpp
     src/window.cpp
     src/events.cpp
+    src/renderer.cpp
 )
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_23)
