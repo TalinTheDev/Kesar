@@ -27,6 +27,7 @@ Window::Window(int width, int height, std::string title) {
   }
   this->window = window;
 
+  glfwSetWindowUserPointer(window, this);
   glfwSetFramebufferSizeCallback(window, changeFramebufferSize);
   glfwMakeContextCurrent(window);
   glfwSwapInterval(1);
@@ -61,7 +62,16 @@ void Window::run(void (*draw)(), void (*update)()) {
   }
 }
 
-void Window::onKey(void (*keyCallback)(int, int)) {
+void Window::onKey(void (*keyCallback)(Window *window, int, int)) {
   kCallback = keyCallback;
   glfwSetKeyCallback(window, this->keyCallback);
 }
+
+void Window::keyCallback(GLFWwindow *window, int key, int scancode, int action,
+                         int mods) {
+  Window *win = (Window *)glfwGetWindowUserPointer(window);
+  if (win && win->kCallback)
+    win->kCallback((Window *)glfwGetWindowUserPointer(window), key, action);
+}
+
+void Window::close() { glfwSetWindowShouldClose(window, GLFW_TRUE); }

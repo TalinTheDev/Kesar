@@ -14,17 +14,16 @@ public:
   ~Window();
 
   void run(void (*draw)(), void (*update)());
-  void onKey(void (*keyCallback)(int key, int action));
+  void onKey(void (*keyCallback)(Window *window, int key, int action));
+  void close();
 
 private:
   GLFWwindow *window;
   void (*draw)();
   void (*update)();
-  inline static void (*kCallback)(int key, int action) = nullptr;
+  void (*kCallback)(Window *window, int key, int action) = nullptr;
 
   static void keyCallback(GLFWwindow *window, int key, int scancode, int action,
-                          int mods) {
-    kCallback(key, action);
-  }
+                          int mods);
 };
 } // namespace Kesar
