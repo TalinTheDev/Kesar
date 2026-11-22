@@ -11,6 +11,10 @@
 using namespace Kesar;
 using namespace Kesar::log;
 
+static void changeFramebufferSize(GLFWwindow *window, int width, int height) {
+  glViewport(0, 0, width, height);
+}
+
 Window::Window(int width, int height, std::string title) {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
@@ -23,14 +27,15 @@ Window::Window(int width, int height, std::string title) {
   }
   this->window = window;
 
+  glfwSetFramebufferSizeCallback(window, changeFramebufferSize);
   glfwMakeContextCurrent(window);
   glfwSwapInterval(1);
   auto version = gladLoadGL(glfwGetProcAddress);
   if (!version)
     error("OpenGL Initialization failed");
   else
-    info(std::format("Loaded OpenGL v{}.{}", GLAD_VERSION_MAJOR(version),
-                     GLAD_VERSION_MINOR(version)));
+    info(std::format("Created window with OpenGL v{}.{}",
+                     GLAD_VERSION_MAJOR(version), GLAD_VERSION_MINOR(version)));
 }
 
 Window::~Window() {
