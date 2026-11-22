@@ -9,6 +9,7 @@ add_library(${PROJECT_NAME} STATIC
     src/log.cpp
     src/app.cpp
     src/window.cpp
+    src/keys.cpp
 )
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_23)

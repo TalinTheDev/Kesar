@@ -47,6 +47,9 @@ void Window::run(void (*draw)(), void (*update)()) {
   this->draw = draw;
   this->update = update;
 
+  int widthFB, heightFB;
+  glfwGetFramebufferSize(window, &widthFB, &heightFB);
+  glViewport(0, 0, widthFB, heightFB);
   while (!glfwWindowShouldClose(window)) {
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -56,4 +59,9 @@ void Window::run(void (*draw)(), void (*update)()) {
     glfwSwapBuffers(window);
     glfwPollEvents();
   }
+}
+
+void Window::onKey(void (*keyCallback)(int, int)) {
+  kCallback = keyCallback;
+  glfwSetKeyCallback(window, this->keyCallback);
 }
