@@ -5,6 +5,7 @@
 #include <Kesar/log.hpp>
 #include <Kesar/window.hpp>
 #include <format>
+#include <functional>
 #include <memory>
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
@@ -45,11 +46,8 @@ Window::~Window() {
   glfwDestroyWindow(window);
   info("Window destroyed");
 }
-
-void Window::run(void (*draw)(), void (*update)()) {
-  this->draw = draw;
-  this->update = update;
-
+void Window::run(const std::function<void()> &draw,
+                 const std::function<void()> &update) {
   int widthFB, heightFB;
   glfwGetFramebufferSize(window, &widthFB, &heightFB);
   glViewport(0, 0, widthFB, heightFB);

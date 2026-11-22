@@ -23,14 +23,15 @@ void checkSuccess(unsigned int shader, bool link = false) {
 Shader::Shader(const std::string &vert, const std::string &frag,
                bool external) {
   unsigned int vertex, fragment;
+  std::string vSource, fSource;
   const char *vertSource;
   const char *fragSource;
 
   if (external) {
-    std::string vSource = readFile(vert);
+    vSource = readFile(vert);
     vertSource = vSource.c_str();
 
-    std::string fSource = readFile(frag);
+    fSource = readFile(frag);
     fragSource = fSource.c_str();
   } else {
     vertSource = vert.c_str();
@@ -58,4 +59,4 @@ Shader::Shader(const std::string &vert, const std::string &frag,
 }
 Shader::~Shader() { glDeleteProgram(id); }
 
-unsigned int Shader::program() { return id; }
+unsigned int Shader::getProgram() const { return id; }

@@ -4,6 +4,7 @@
 #pragma once
 
 #include <Kesar/mesh.hpp>
+#include <Kesar/shader.hpp>
 #include <Kesar/types.hpp>
 
 namespace Kesar {
@@ -14,9 +15,10 @@ public:
   ~Renderer() = default;
 
   void setClearColor(Color c);
-  void draw(const Mesh &m);
+  void draw(const Mesh &m) const;
 
 private:
   Color clearColor;
+  Shader defaultShader;
 };
 } // namespace Kesar

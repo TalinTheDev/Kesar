@@ -4,6 +4,7 @@
 #pragma once
 
 #include <Kesar/renderer.hpp>
+#include <functional>
 #include <memory>
 #include <string>
 
@@ -15,7 +16,9 @@ public:
   Window(int width, int height, std::string title);
   ~Window();
 
-  void run(void (*draw)(), void (*update)());
+  void run(const std::function<void()> &draw,
+           const std::function<void()> &update);
+
   void onKey(void (*keyCallback)(Window *window, int key, int action));
   void close();
   const Renderer &getRenderer();
