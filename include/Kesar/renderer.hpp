@@ -3,14 +3,10 @@
 
 #pragma once
 
-namespace Kesar {
-struct Color {
-  float r = 0.0f;
-  float g = 0.0f;
-  float b = 0.0f;
-  float a = 1.0f;
-};
+#include <Kesar/mesh.hpp>
+#include <Kesar/types.hpp>
 
+namespace Kesar {
 class Renderer {
 public:
   Renderer();
@@ -18,6 +14,7 @@ public:
   ~Renderer() = default;
 
   void setClearColor(Color c);
+  void draw(const Mesh &m);
 
 private:
   Color clearColor;

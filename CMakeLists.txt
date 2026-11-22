@@ -11,6 +11,7 @@ add_library(${PROJECT_NAME} STATIC
     src/window.cpp
     src/events.cpp
     src/renderer.cpp
+    src/mesh.cpp
 )
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_23)
