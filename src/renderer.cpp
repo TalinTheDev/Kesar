@@ -16,3 +16,13 @@ void Renderer::setClearColor(Color c) {
   clearColor = c;
   glClearColor(c.r, c.g, c.b, c.a);
 }
+
+void Renderer::draw(const Mesh &m) {
+  glBindVertexArray(m.getVertexArray());
+
+  if (m.indexCount > 0) {
+    glDrawElements(GL_TRIANGLES, m.indexCount, GL_UNSIGNED_INT, nullptr);
+  } else {
+    glDrawArrays(GL_TRIANGLES, 0, m.vertexCount);
+  }
+}

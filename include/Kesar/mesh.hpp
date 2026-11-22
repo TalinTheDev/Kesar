@@ -20,9 +20,12 @@ public:
   void colors(const std::vector<Color> &c);
   void indices(const std::vector<unsigned int> &i);
 
-private:
-  int vertexCount = 0;
+  unsigned int getVertexArray() const;
 
+  unsigned int vertexCount = 0;
+  unsigned int indexCount = 0;
+
+private:
   unsigned int vertexData = 0;
   unsigned int colorData = 0;
   unsigned int indexData = 0;

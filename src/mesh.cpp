@@ -82,6 +82,7 @@ void Mesh::indices(const std::vector<unsigned int> &i) {
         return;
       }
     }
+    indexCount = i.size();
 
     if (indexData == 0) {
       glCreateBuffers(1, &indexData);
@@ -95,3 +96,5 @@ void Mesh::indices(const std::vector<unsigned int> &i) {
     warn("Attempted to assign zero indices to a mesh");
   }
 }
+
+unsigned int Mesh::getVertexArray() const { return attribData; }
