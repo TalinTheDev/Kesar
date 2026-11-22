@@ -50,10 +50,10 @@ void Mesh::colors(const std::vector<Color> &c) {
     return;
   }
 
-  unsigned int cSize = c.size();
-  if (cSize != vertexCount) {
+  colorCount = c.size();
+  if (colorCount != vertexCount) {
     error(std::format("Can't assign {} colors to a mesh with {} vertices",
-                      cSize, vertexCount));
+                      colorCount, vertexCount));
     return;
   }
 
@@ -61,7 +61,8 @@ void Mesh::colors(const std::vector<Color> &c) {
     glCreateBuffers(1, &colorData);
   }
 
-  glNamedBufferData(colorData, sizeof(Color) * cSize, c.data(), GL_STATIC_DRAW);
+  glNamedBufferData(colorData, sizeof(Color) * colorCount, c.data(),
+                    GL_STATIC_DRAW);
 
   glVertexArrayVertexBuffer(attribData, 1, colorData, 0, sizeof(Color));
   glVertexArrayAttribFormat(attribData, 1, 4, GL_FLOAT, GL_FALSE, 0);

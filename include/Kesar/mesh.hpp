@@ -23,6 +23,7 @@ public:
   unsigned int getVertexArray() const;
 
   unsigned int vertexCount = 0;
+  unsigned int colorCount = 0;
   unsigned int indexCount = 0;
 
 private:

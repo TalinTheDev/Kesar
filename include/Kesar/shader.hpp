@@ -43,10 +43,15 @@ private:
 inline std::string defaultVertexShader = R"(
 #version 460 core
 layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec4 aColor;
+
+out vec4 vColor;
 
 void main()
 {
     gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+    vColor = aColor;
+
 }
 )";
 
@@ -54,9 +59,11 @@ inline std::string defaultFragmentShader = R"(
 #version 460 core
 out vec4 FragColor;
 
+in vec4 vColor;
+
 void main()
 {
-    FragColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+    FragColor = vColor;
 } 
 )";
 
