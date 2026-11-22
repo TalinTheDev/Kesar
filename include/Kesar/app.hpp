@@ -19,7 +19,7 @@ public:
   App &operator=(const App &) = delete;
 
   void onError(void (*errCallback)(std::string description));
-  Window *createWindow(int width, int height, std::string title);
+  Window &createWindow(int width, int height, const std::string &title);
 
 private:
   std::vector<std::unique_ptr<Window>> windows;

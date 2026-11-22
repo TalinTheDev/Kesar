@@ -78,14 +78,14 @@ void Window::keyCallback(GLFWwindow *window, int key, int scancode, int action,
 
 void Window::close() { glfwSetWindowShouldClose(window, GLFW_TRUE); }
 
-Renderer *Window::getRenderer() {
+const Renderer &Window::getRenderer() {
   renderer = std::make_unique<Renderer>();
 
-  return renderer.get();
+  return *renderer;
 }
 
-Renderer *Window::getRenderer(Color c) {
+const Renderer &Window::getRenderer(Color c) {
   renderer = std::make_unique<Renderer>(c);
 
-  return renderer.get();
+  return *renderer;
 }

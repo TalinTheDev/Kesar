@@ -28,10 +28,10 @@ App::~App() {
 
 void App::onError(void (*errCallback)(std::string)) { eCallback = errCallback; }
 
-Window *App::createWindow(int width, int height, std::string title) {
+Window &App::createWindow(int width, int height, const std::string &title) {
   std::unique_ptr<Window> window =
       std::make_unique<Window>(width, height, std::move(title));
-  Window *ptr = window.get();
+  Window &ptr = *window;
   windows.push_back(std::move(window));
 
   return ptr;
