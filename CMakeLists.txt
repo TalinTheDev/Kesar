@@ -13,6 +13,7 @@ add_library(${PROJECT_NAME} STATIC
     src/renderer.cpp
     src/mesh.cpp
     src/shader.cpp
+    src/camera.cpp
 )
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_23)
@@ -36,13 +37,20 @@ FetchContent_Declare(
 )
 
 FetchContent_MakeAvailable(glfw)
-
-target_link_libraries(${PROJECT_NAME}
-    PRIVATE glfw
-)
+target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
 
 # Include GLAD
 target_sources(${PROJECT_NAME} PRIVATE vendor/glad/src/gl.c)
 
+# Include GLM
+FetchContent_Declare(
+	glm
+	GIT_REPOSITORY	https://github.com/g-truc/glm.git
+	GIT_TAG 	1.0.3
+)
 
+FetchContent_MakeAvailable(glm)
+target_link_libraries(${PROJECT_NAME} PUBLIC glm::glm)
+
+# Redefine Kesar as Kesar::Kesar
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})

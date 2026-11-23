@@ -78,5 +78,6 @@ Kesar uses the following open-source libraries:
 
 - **[GLFW](https://github.com/glfw/glfw)** — Licensed under the [zlib/libpng License](https://github.com/glfw/glfw/blob/master/LICENSE.md)
 - **[GLAD 2](https://github.com/Dav1dde/glad)** — Licensed under the [MIT License](https://github.com/Dav1dde/glad/blob/glad2/LICENSE). The generated code may also incorporate Khronos specifications and headers subject to Apache 2.0 and other permissive licenses.
+- **[GLM](https://github.com/g-truc/glm)** — Licensed under [The Happy Bunny License or the MIT License](https://github.com/g-truc/glm/blob/master/copying.txt)
 
 Third-party components remain subject to their respective licenses.
