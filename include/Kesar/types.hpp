@@ -4,11 +4,13 @@
 #pragma once
 
 namespace Kesar {
-struct Vertex {
+struct Vector3 {
   float x = 0.0f;
   float y = 0.0f;
   float z = 0.0f;
 };
+
+typedef Vector3 Vertex;
 
 struct Color {
   float r = 0.0f;
