@@ -3,6 +3,9 @@
 
 #include <Kesar/shader.hpp>
 #include <glad/gl.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 using namespace Kesar;
 
@@ -60,3 +63,15 @@ Shader::Shader(const std::string &vert, const std::string &frag,
 Shader::~Shader() { glDeleteProgram(id); }
 
 unsigned int Shader::getProgram() const { return id; }
+
+void Shader::uniform(std::string name, glm::mat4 matrix) {
+  unsigned int loc = 0;
+  if (uniforms.contains(name)) {
+    loc = uniforms[name];
+  } else {
+    loc = glGetUniformLocation(id, name.c_str());
+    uniforms[name] = loc;
+  }
+  glUseProgram(id);
+  glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(matrix));
+}

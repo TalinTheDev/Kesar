@@ -7,7 +7,11 @@
 #include <filesystem>
 #include <format>
 #include <fstream>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <iostream>
+#include <map>
 #include <string>
 
 using namespace Kesar::log;
@@ -20,9 +24,11 @@ public:
   ~Shader();
 
   unsigned int getProgram() const;
+  void uniform(std::string name, glm::mat4 matrix);
 
 private:
   unsigned int id;
+  std::map<std::string, unsigned int> uniforms{};
 
   static std::string readFile(const std::string &path) {
     std::ifstream file(path, std::ios::binary);
@@ -45,11 +51,15 @@ inline std::string defaultVertexShader = R"(
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec4 aColor;
 
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
 out vec4 vColor;
 
 void main()
 {
-    gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+    gl_Position = projection * view * model * vec4(aPos, 1.0);
     vColor = aColor;
 
 }
