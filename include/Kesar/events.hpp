@@ -6,7 +6,11 @@
 namespace Kesar {
 namespace keys {
 extern const int escape;
-}
+extern const int w;
+extern const int s;
+extern const int a;
+extern const int d;
+} // namespace keys
 namespace actions {
 extern const int press;
 extern const int release;
