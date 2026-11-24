@@ -21,8 +21,8 @@ public:
 
   void onKey(void (*keyCallback)(Window *window, int key, int action));
   void close();
-  const Renderer &getRenderer();
-  const Renderer &getRenderer(Color c);
+  Renderer &getRenderer();
+  Renderer &getRenderer(Color c);
 
 private:
   GLFWwindow *window;

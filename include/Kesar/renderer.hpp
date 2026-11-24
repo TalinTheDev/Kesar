@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <Kesar/camera.hpp>
 #include <Kesar/mesh.hpp>
 #include <Kesar/shader.hpp>
 #include <Kesar/types.hpp>
@@ -15,10 +16,12 @@ public:
   ~Renderer() = default;
 
   void setClearColor(Color c);
-  void draw(const Mesh &m) const;
+  void draw(const Mesh &m);
+  void setCamera(Camera &c);
 
 private:
   Color clearColor;
   Shader defaultShader;
+  Camera *camera = nullptr;
 };
 } // namespace Kesar
