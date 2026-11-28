@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Kesar/window.hpp"
+#include <Kesar/window.hpp>
 #include <memory>
 #include <string>
 #include <vector>
@@ -20,7 +20,7 @@ public:
 
   void onError(void (*errCallback)(std::string description));
   Window &createWindow(int width, int height, const std::string &title);
-  double deltaTime();
+  double getTime() const;
 
 private:
   std::vector<std::unique_ptr<Window>> windows;

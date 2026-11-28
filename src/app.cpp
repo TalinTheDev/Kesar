@@ -30,11 +30,11 @@ void App::onError(void (*errCallback)(std::string)) { eCallback = errCallback; }
 
 Window &App::createWindow(int width, int height, const std::string &title) {
   std::unique_ptr<Window> window =
-      std::make_unique<Window>(width, height, std::move(title));
+      std::make_unique<Window>(width, height, std::move(title), *this);
   Window &ptr = *window;
   windows.push_back(std::move(window));
 
   return ptr;
 };
 
-double App::deltaTime() { return glfwGetTime(); }
+double App::getTime() const { return glfwGetTime(); }

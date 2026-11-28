@@ -78,6 +78,11 @@ void Camera::updateFly(
 
   if (glm::length(movement) > 0.0f)
     position += glm::normalize(movement) * speed * deltaTime;
+
+  rotation.y -= deltaX;
+  rotation.x += deltaY;
+
+  rotation.x = glm::clamp(rotation.x, -89.0f, 89.0f);
 }
 
 void Camera::setSpeed(float speed) { this->speed = speed; }

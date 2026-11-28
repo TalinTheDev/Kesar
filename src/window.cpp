@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 
 #include "Kesar/renderer.hpp"
+#include <Kesar/app.hpp>
 #include <Kesar/log.hpp>
 #include <Kesar/window.hpp>
 #include <format>
@@ -18,7 +19,8 @@ static void changeFramebufferSize(GLFWwindow *window, int width, int height) {
   glViewport(0, 0, width, height);
 }
 
-Window::Window(int width, int height, std::string title) {
+Window::Window(int width, int height, std::string title, Kesar::App &app)
+    : app(app) {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -48,6 +50,8 @@ Window::~Window() {
 }
 void Window::run(const std::function<void()> &draw,
                  const std::function<void()> &update) {
+  lastFrame = app.getTime();
+
   int widthFB, heightFB;
   glfwGetFramebufferSize(window, &widthFB, &heightFB);
   glViewport(0, 0, widthFB, heightFB);
@@ -61,6 +65,11 @@ void Window::run(const std::function<void()> &draw,
 
     glfwSwapBuffers(window);
     glfwPollEvents();
+
+    double currentTime = app.getTime();
+
+    deltaTime = currentTime - lastFrame;
+    lastFrame = currentTime;
   }
 }
 
@@ -69,11 +78,25 @@ void Window::onKey(void (*keyCallback)(Window *window, int, int)) {
   glfwSetKeyCallback(window, this->keyCallback);
 }
 
+void Window::onMouse(void (*mouseCallback)(Window *window, float, float)) {
+  mCallback = mouseCallback;
+  glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+  glfwSetCursorPosCallback(window, this->mouseCallback);
+}
+
 void Window::keyCallback(GLFWwindow *window, int key, int scancode, int action,
                          int mods) {
   Window *win = (Window *)glfwGetWindowUserPointer(window);
   if (win && win->kCallback)
     win->kCallback((Window *)glfwGetWindowUserPointer(window), key, action);
+}
+
+void Window::mouseCallback(GLFWwindow *window, double xPos, double yPos) {
+  Window *win = (Window *)glfwGetWindowUserPointer(window);
+  if (win && win->mCallback) {
+    win->mCallback((Window *)glfwGetWindowUserPointer(window), (float)xPos,
+                   (float)yPos);
+  }
 }
 
 void Window::close() { glfwSetWindowShouldClose(window, GLFW_TRUE); }
@@ -89,3 +112,5 @@ Renderer &Window::getRenderer(Color c) {
 
   return *renderer;
 }
+
+float Window::getDeltaTime() const { return deltaTime; }
