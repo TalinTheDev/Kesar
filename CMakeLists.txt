@@ -14,6 +14,7 @@ add_library(${PROJECT_NAME} STATIC
     src/mesh.cpp
     src/shader.cpp
     src/camera.cpp
+    src/transform.cpp
 )
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_23)

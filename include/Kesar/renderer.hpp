@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "Kesar/transform.hpp"
 #include <Kesar/camera.hpp>
 #include <Kesar/mesh.hpp>
 #include <Kesar/shader.hpp>
@@ -16,7 +17,7 @@ public:
   ~Renderer() = default;
 
   void setClearColor(Color c);
-  void draw(const Mesh &m);
+  void draw(const Mesh &m, const Transform *t = nullptr);
   void setCamera(Camera &c);
 
 private:

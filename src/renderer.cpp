@@ -1,9 +1,10 @@
 // Copyright (c) 2026 Talin Sharma
 // SPDX-License-Identifier: MIT
 
-#include "Kesar/camera.hpp"
-#include "Kesar/shader.hpp"
+#include "Kesar/transform.hpp"
+#include <Kesar/camera.hpp>
 #include <Kesar/renderer.hpp>
+#include <Kesar/shader.hpp>
 #include <glad/gl.h>
 
 using namespace Kesar;
@@ -25,9 +26,9 @@ void Renderer::setClearColor(Color c) {
 
 void Renderer::setCamera(Camera &c) { camera = &c; }
 
-void Renderer::draw(const Mesh &m) {
+void Renderer::draw(const Mesh &m, const Transform *t) {
   glUseProgram(defaultShader.getProgram());
-  defaultShader.uniform("model", glm::mat4{1.0f});
+  defaultShader.uniform("model", t ? t->getMatrix() : glm::mat4{1.0f});
   defaultShader.uniform("view", camera->getView());
   defaultShader.uniform("projection", camera->getProjection());
   glBindVertexArray(m.getVertexArray());
