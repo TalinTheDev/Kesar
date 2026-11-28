@@ -51,8 +51,10 @@ void Window::run(const std::function<void()> &draw,
   int widthFB, heightFB;
   glfwGetFramebufferSize(window, &widthFB, &heightFB);
   glViewport(0, 0, widthFB, heightFB);
+
+  glEnable(GL_DEPTH_TEST);
   while (!glfwWindowShouldClose(window)) {
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     update();
     draw();
