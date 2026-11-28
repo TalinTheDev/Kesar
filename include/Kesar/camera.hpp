@@ -17,13 +17,19 @@ public:
   void perspective(float fov, float aspectRatio, float near, float far);
   void setPosition(Vector3 pos);
   void setRotation(Vector3 rot);
+  void setSpeed(float speed);
   void setTarget(Vector3 pos);
+  void updateFly(float deltaTime,
+                 const std::unordered_map<unsigned int, bool> &keyboardState,
+                 float deltaX = 0.0f, float deltaY = 0.0f, float xScroll = 0.0f,
+                 float yScroll = 0.0f);
 
   glm::mat4 getProjection() const;
   glm::mat4 getView();
 
 private:
   bool useTarget = false;
+  float speed = 0.0f;
 
   glm::vec3 position{0.0f};
   Vector3 rotation{0.0f, 90.0f, 0.0f};

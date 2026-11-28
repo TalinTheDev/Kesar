@@ -1,6 +1,9 @@
 // Copyright (c) 2026 Talin Sharma
 // SPDX-License-Identifier: MIT
 
+#include "Kesar/events.hpp"
+#include "glm/ext/quaternion_geometric.hpp"
+#include "glm/geometric.hpp"
 #include "glm/trigonometric.hpp"
 #include <Kesar/camera.hpp>
 #include <Kesar/log.hpp>
@@ -52,3 +55,29 @@ glm::mat4 Camera::getView() {
   viewMat = glm::lookAt(position, useTarget ? target : position + forward, up);
   return viewMat;
 }
+
+void Camera::updateFly(
+    float deltaTime,
+    const std::unordered_map<unsigned int, bool> &keyboardState, float deltaX,
+    float deltaY, float xScroll, float yScroll) {
+  auto isPressed = [&](unsigned int key) {
+    auto it = keyboardState.find(key);
+    return it != keyboardState.end() && it->second;
+  };
+
+  glm::vec3 movement{0.0f};
+
+  if (isPressed(keys::w))
+    movement += forward;
+  if (isPressed(keys::s))
+    movement -= forward;
+  if (isPressed(keys::a))
+    movement -= glm::normalize(glm::cross(forward, up));
+  if (isPressed(keys::d))
+    movement += glm::normalize(glm::cross(forward, up));
+
+  if (glm::length(movement) > 0.0f)
+    position += glm::normalize(movement) * speed * deltaTime;
+}
+
+void Camera::setSpeed(float speed) { this->speed = speed; }

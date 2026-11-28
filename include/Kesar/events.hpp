@@ -10,6 +10,7 @@ extern const int w;
 extern const int s;
 extern const int a;
 extern const int d;
+extern const int tab;
 } // namespace keys
 namespace actions {
 extern const int press;

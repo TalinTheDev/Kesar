@@ -36,3 +36,5 @@ Window &App::createWindow(int width, int height, const std::string &title) {
 
   return ptr;
 };
+
+double App::deltaTime() { return glfwGetTime(); }

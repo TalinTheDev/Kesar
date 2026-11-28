@@ -20,6 +20,7 @@ public:
 
   void onError(void (*errCallback)(std::string description));
   Window &createWindow(int width, int height, const std::string &title);
+  double deltaTime();
 
 private:
   std::vector<std::unique_ptr<Window>> windows;

@@ -12,6 +12,7 @@ const int w = GLFW_KEY_W;
 const int s = GLFW_KEY_S;
 const int a = GLFW_KEY_A;
 const int d = GLFW_KEY_D;
+const int tab = GLFW_KEY_TAB;
 } // namespace keys
 namespace actions {
 const int press = GLFW_PRESS;
